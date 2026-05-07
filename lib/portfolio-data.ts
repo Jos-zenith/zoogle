@@ -51,14 +51,6 @@ export const portfolioData: SearchResult[] = [
   },
   {
     id: "work-2",
-    title: "Founder & Developer - Panjaayathu",
-    url: "zenithjoshua.dev/experience/panjaayathu",
-    description:
-      "Designing a digital mental-health platform with CBT-inspired workflows, user-centric interfaces, and HIPAA-aware architecture.",
-    category: "experience",
-  },
-  {
-    id: "work-3",
     title: "Co-Founder & CTO - ParkinToday",
     url: "zenithjoshua.dev/experience/parkingtoday",
     description:
@@ -66,7 +58,7 @@ export const portfolioData: SearchResult[] = [
     category: "experience",
   },
   {
-    id: "work-4",
+    id: "work-3",
     title: "AI & Machine Learning Intern - Edunet Foundation (AICTE)",
     url: "zenithjoshua.dev/experience/edunet",
     description:
@@ -77,7 +69,7 @@ export const portfolioData: SearchResult[] = [
   // Projects
   {
     id: "proj-1",
-    title: "Electric 4-Wheeler Prototype",
+    title: "Electric 4-Wheeler Design Challenge - SAEISS",
     url: "drive.google.com/drive/folders/1SVLk6qsWlZ-nsQEsMhuZbYVaBtXikEPL",
     description:
       "Designed and developed an electric 4-wheeler prototype with a 22-member team; placed 3rd at EFWDC'25.",
@@ -401,37 +393,107 @@ export const searchSuggestions = [
 ]
 
 export const categoryMap: Record<string, string[]> = {
-  about: ["about", "bio", "education", "background", "resume"],
-  experience: ["experience", "work", "job", "career", "lead", "founder", "cto", "intern"],
-  projects: ["projects", "portfolio", "prototype", "app", "iot", "rover", "parking", "health"],
-  skills: ["skills", "stack", "programming", "technology", "tools", "competencies"],
-  achievements: ["awards", "achievements", "competition", "place", "winner", "recognition"],
-  certifications: ["certifications", "certificates", "course", "coursera", "udemy", "ibm", "springboard"],
-  stats: ["stats", "numbers", "problems", "projects completed", "awards won"],
-  interests: ["interests", "focus", "passion", "innovation", "healthcare", "analytics"],
-  contact: ["contact", "reach", "email", "social", "connect", "github", "linkedin", "phone", "resume"],
+  about: ["about", "bio", "education", "background", "resume", "zenith joshua", "introduction"],
+  experience: ["experience", "work", "job", "career", "lead", "founder", "cto", "intern", "team lead", "leadership"],
+  projects: ["projects", "portfolio", "prototype", "app", "iot", "rover", "parking", "health", "startup", "mental health", "water", "wheel chair", "glaucoma", "cipher", "engineerfit", "karuvelam", "jalodhyam", "mars", "efwdc", "ride-hailing", "gesture"],
+  skills: ["skills", "stack", "programming", "technology", "tools", "competencies", "python", "java", "react", "nodejs", "embedded", "arduino", "esp32"],
+  achievements: ["awards", "achievements", "competition", "place", "winner", "recognition", "first place", "second place", "third place", "envision", "ecircle", "india@2047", "efwdc", "impactx", "hackathon"],
+  certifications: ["certifications", "certificates", "course", "coursera", "udemy", "ibm", "springboard", "skillrack", "agile", "cybersecurity", "networks"],
+  stats: ["stats", "numbers", "problems", "projects completed", "awards won", "leetcode", "skillrack", "duolingo", "unstop"],
+  interests: ["interests", "focus", "passion", "innovation", "healthcare", "analytics", "iot", "ai", "automotive", "leadership"],
+  contact: ["contact", "reach", "email", "social", "connect", "github", "linkedin", "phone", "resume", "zenithjoshua.27it"],
+}
+
+const itemKeywordIndex: Record<string, string[]> = {
+  "about-3": ["cgpa", "grade", "semester", "licet", "education"],
+  "about-4": ["resume", "cv", "document", "profile"],
+  "work-1": ["hackathon", "efwdc", "automotive", "team", "lead"],
+  "work-2": ["iot", "startup", "parking", "cto"],
+  "proj-1": ["efwdc", "automotive", "ev", "prototype"],
+  "proj-3": ["hackathon", "rover", "mars", "hardware"],
+  "proj-5": ["iot", "parking", "startup"],
+  "proj-8": ["iot", "gesture", "wheelchair", "hackathon"],
+  "proj-9": ["esp32", "iot", "navigation", "drivers"],
+  "proj-10": ["healthtech", "medical", "monitor"],
+  "skill-1": ["skills", "programming", "react", "next", "python", "java"],
+  "skill-2": ["iot", "esp32", "arduino", "raspberry", "embedded"],
+  "award-8": ["hackathon", "ai", "buildathon"],
+  "award-9": ["hackathon", "hardware", "rover"],
+  "award-10": ["hackathon", "startup", "karuvelam"],
+  "award-11": ["hackathon", "sih", "jalodhyam"],
+}
+
+function tokenizeQuery(query: string): string[] {
+  return query
+    .toLowerCase()
+    .split(/[^a-z0-9@.+-]+/)
+    .map((token) => token.trim())
+    .filter(Boolean)
 }
 
 export function searchPortfolio(query: string): SearchResult[] {
   const lowerQuery = query.toLowerCase().trim()
+  const queryTokens = tokenizeQuery(lowerQuery)
 
   if (!lowerQuery) return []
 
-  // Check which category matches best
-  for (const [category, keywords] of Object.entries(categoryMap)) {
-    if (keywords.some((keyword) => lowerQuery.includes(keyword))) {
-      return portfolioData.filter((item) => item.category === category)
-    }
+  // Special case: "lucky" - return a highlighted impressive item
+  if (lowerQuery === "lucky") {
+    const luckyItem = portfolioData.find((item) => item.id === "proj-11") // VICT cipher
+    return luckyItem ? [luckyItem] : []
   }
 
-  // Fallback: search all items
-  return portfolioData.filter(
-    (item) =>
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.url.toLowerCase().includes(lowerQuery) ||
-      item.category.toLowerCase().includes(lowerQuery),
-  )
+  // Special case: "recent" or "latest" - return the most impressive items across all categories
+  if (lowerQuery === "recent" || lowerQuery === "latest") {
+    return [
+      portfolioData.find((item) => item.id === "award-9")!, // Hardware Hackathon 2.0 - Mars rover
+      portfolioData.find((item) => item.id === "proj-3")!, // Mars Rover
+      portfolioData.find((item) => item.id === "work-1")!, // EFWDC Team Lead
+      portfolioData.find((item) => item.id === "award-4")!, // 3rd Place EFWDC'25
+      portfolioData.find((item) => item.id === "proj-11")!, // VICT cipher
+      portfolioData.find((item) => item.id === "work-2")!, // ParkinToday CTO
+      portfolioData.find((item) => item.id === "proj-2")!, // EngineerFit
+      portfolioData.find((item) => item.id === "award-8")!, // AI Buildathon Top 10
+    ].filter(Boolean)
+  }
+
+  // Search-engine-like scoring across title/description/url/category plus indexed keywords.
+  const scoredResults = portfolioData
+    .map((item) => {
+      const haystack = `${item.title} ${item.description} ${item.url} ${item.category}`.toLowerCase()
+      const indexedKeywords = itemKeywordIndex[item.id] || []
+      let score = 0
+
+      if (haystack.includes(lowerQuery)) {
+        score += 6
+      }
+
+      for (const token of queryTokens) {
+        if (item.title.toLowerCase().includes(token)) score += 6
+        if (item.url.toLowerCase().includes(token)) score += 4
+        if (item.description.toLowerCase().includes(token)) score += 3
+        if (item.category.toLowerCase().includes(token)) score += 2
+
+        if (indexedKeywords.some((keyword) => keyword.includes(token) || token.includes(keyword))) {
+          score += 5
+        }
+
+        for (const categoryKeywords of Object.values(categoryMap)) {
+          if (categoryKeywords.some((keyword) => keyword.includes(token) || token.includes(keyword))) {
+            if (categoryMap[item.category]?.some((keyword) => keyword.includes(token) || token.includes(keyword))) {
+              score += 2
+            }
+          }
+        }
+      }
+
+      return { item, score }
+    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((entry) => entry.item)
+
+  return scoredResults
 }
 
 export interface ExamEntry {

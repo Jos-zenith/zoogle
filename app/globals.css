@@ -43,6 +43,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --cursor-default: url("/cursors/arrow.svg") 1 1;
+  --cursor-pointer: url("/cursors/hand.svg") 5 1;
+  --cursor-text: url("/cursors/text.svg") 8 12;
+  --cursor-wait: url("/cursors/wait.svg") 8 8;
+  --cursor-not-allowed: url("/cursors/not-allowed.svg") 8 8;
+  --cursor-grab: url("/cursors/grab.svg") 8 8;
+  --cursor-grabbing: url("/cursors/grabbing.svg") 8 8;
 }
 
 /* Reset margin/padding for full screen */
@@ -138,38 +145,162 @@ body {
     line-height: 1.5;
     margin: 0;
     padding: 0;
-    cursor: auto;
+    cursor: var(--cursor-default), default;
   }
   /* 1997 Web Link Styling */
   a {
-    color: #0000ff;
+    color: #0000cc;
     text-decoration: underline;
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
   }
   a:visited {
-    color: #800080;
+    color: #551a8b;
   }
   a:active {
     color: #ff0000;
   }
   a:hover {
     text-decoration: underline;
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
+  }
+  /* Ensure visited links show proper color */
+  .retro-link {
+    color: #0000cc;
+  }
+  .retro-link:visited {
+    color: #551a8b;
+  }
+  .retro-link:active {
+    color: #ff0000;
+  }
+  .retro-link:hover {
+    text-decoration: underline;
   }
   /* 1997 Cursor Styles */
   button {
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
   }
   input,
   textarea {
-    cursor: text;
+    cursor: var(--cursor-text), text;
+    caret-color: #000000;
   }
   input[type="submit"],
   input[type="button"],
   input[type="reset"] {
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
   }
   [role="button"] {
-    cursor: pointer;
+    cursor: var(--cursor-pointer), pointer;
   }
+  [draggable="true"] {
+    cursor: var(--cursor-grab), grab;
+  }
+  [draggable="true"]:active {
+    cursor: var(--cursor-grabbing), grabbing;
+  }
+  :disabled,
+  [aria-disabled="true"],
+  .disabled {
+    cursor: var(--cursor-not-allowed), not-allowed !important;
+    filter: grayscale(0.35);
+    opacity: 0.7;
+  }
+}
+
+/* Retro bevel button style */
+.retro-button {
+  @apply px-4 py-1 text-[12px] text-black bg-[#c0c0c0] border-2 border-[#dfdfdf];
+  box-shadow: 1px 1px 0px #ffffff inset, -1px -1px 0px #808080 inset;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: var(--cursor-pointer), pointer;
+}
+
+.retro-button:active {
+  box-shadow: inset 1px 1px 0px #808080, inset -1px -1px 0px #ffffff;
+  transform: translate(1px, 1px);
+}
+
+.retro-button:hover {
+  @apply bg-[#d0d0d0];
+}
+
+/* Loading animation - retro flicker effect */
+@keyframes retro-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes retro-caret-blink {
+  0%, 49% {
+    caret-color: #000000;
+  }
+  50%, 100% {
+    caret-color: transparent;
+  }
+}
+
+.retro-loading {
+  animation: retro-flicker 1.5s infinite;
+}
+
+.retro-loading,
+.retro-loading * {
+  cursor: var(--cursor-wait), wait !important;
+}
+
+[aria-busy="true"],
+[aria-busy="true"] * {
+  cursor: var(--cursor-wait), wait !important;
+}
+
+body:has(.retro-loading) {
+  cursor: var(--cursor-wait), wait;
+}
+
+/* 1997 Windows-like scrollbar */
+* {
+  scrollbar-color: #7b7b7b #c9c9c9;
+  scrollbar-width: auto;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: #c9c9c9;
+}
+
+*::-webkit-scrollbar-track {
+  background: #c9c9c9;
+  border: 1px solid #9b9b9b;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #7b7b7b;
+  border: 1px solid #555555;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #686868;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #c9c9c9;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+/* Disable modern motion and smoothing for a static 1997 feel */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+  transition: none !important;
+  animation: none !important;
 }

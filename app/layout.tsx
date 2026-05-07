@@ -4,12 +4,16 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Zenith Joshua - Portfolio Search",
+  title: "Jos_zenith - Search the Web",
   description:
     "Search Zenith Joshua's portfolio for about, experience, projects, skills, achievements, certifications, and contact info.",
   generator: "v0.app",
   icons: {
     icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
       {
         url: "/icon-light-32x32.png",
         media: "(prefers-color-scheme: light)",
@@ -17,10 +21,6 @@ export const metadata: Metadata = {
       {
         url: "/icon-dark-32x32.png",
         media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
       },
     ],
     apple: "/apple-icon.png",

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue block (top left) -->
+  <rect x="0" y="0" width="128" height="128" fill="#4285f4"/>
+  <!-- Red block (top right) -->
+  <rect x="128" y="0" width="128" height="128" fill="#ea4335"/>
+  <!-- Yellow block (bottom left) -->
+  <rect x="0" y="128" width="128" height="128" fill="#fbbc04"/>
+  <!-- Green block (bottom right) -->
+  <rect x="128" y="128" width="128" height="128" fill="#34a853"/>
+  
+  <!-- "J" letter in white -->
+  <text x="128" y="195" font-family="Arial, sans-serif" font-size="160" font-weight="bold" text-anchor="middle" fill="white">J</text>
+</svg>

@@ -82,15 +82,12 @@ export function SearchBar({ initialQuery = "", autoFocus = false, compact = fals
           placeholder={compact ? "Search" : "Search my portfolio..."}
           style={{
             fontFamily: "Arial, Helvetica, sans-serif",
-            boxShadow: "inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080",
           }}
         />
 
         {/* Suggestions Dropdown */}
         {showSuggestions && filteredSuggestions.length > 0 && (
-          <div className="absolute top-full left-0 right-0 bg-white border-2 border-t-0 border-[#cccccc] z-50 overflow-hidden" style={{
-            boxShadow: "1px 1px 0px #000000"
-          }}>
+          <div className="absolute top-full left-0 right-0 bg-white border-2 border-t-0 border-[#cccccc] z-50 overflow-hidden">
             {filteredSuggestions.map((suggestion, index) => (
               <button
                 key={suggestion}
@@ -123,9 +120,7 @@ export function SearchBar({ initialQuery = "", autoFocus = false, compact = fals
           <button
             type="button"
             onClick={() => {
-              const categories = ["about", "experience", "projects", "skills", "achievements", "certifications", "contact"]
-              const random = categories[Math.floor(Math.random() * categories.length)]
-              handleSearch(random)
+              handleSearch("lucky")
             }}
             className="px-4 py-1 text-[12px] text-black
               bg-[#c0c0c0] border-2 border-[#dfdfdf]
@@ -148,7 +143,7 @@ export function SearchBar({ initialQuery = "", autoFocus = false, compact = fals
               key={term}
               type="button"
               onClick={() => handleSearch(term)}
-              className="text-[#0000ff] underline capitalize"
+              className="text-[#0000cc] underline capitalize"
             >
               {term}
             </button>

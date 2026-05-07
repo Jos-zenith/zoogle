@@ -29,12 +29,28 @@ function SearchResults({ query }: { query: string }) {
 
   return (
     <div>
-      <p className="text-[13px] text-[#70757a] mb-4">
-        About {results.length} results (0.42 seconds)
-      </p>
+      <div className="mb-4">
+        <p className="text-[13px] text-[#70757a]">
+          About {results.length} results (0.42 seconds)
+        </p>
+        <p className="mt-1 text-[11px] text-[#8a8a8a]">Searching the web since 1997</p>
+        <p className="mt-2 text-[12px] text-[#666666]">
+          Did you mean: <a href={`/search?q=${encodeURIComponent(query || "about")}`} className="text-[#0000cc] underline">{query || "about"}</a>
+        </p>
+      </div>
 
-      {results.map((result) => (
-        <SearchResult key={result.id} result={result} />
+      <section className="max-w-[600px] mb-7 border border-[#bbbbbb] p-2">
+        <p className="text-[12px] font-bold text-black">Sponsored Links</p>
+        <p className="text-[11px] text-[#444444]">--------------------------------</p>
+        <div className="mt-1 flex flex-col gap-1 text-[13px] leading-[1.2]">
+          <a href="#" className="text-[#0000cc]">Learn HTML in 24 Hours</a>
+          <a href="#" className="text-[#0000cc]">Free Guestbook Hosting</a>
+          <a href="#" className="text-[#0000cc]">Download Winamp Skins</a>
+        </div>
+      </section>
+
+      {results.map((result, index) => (
+        <SearchResult key={result.id} result={result} index={index} />
       ))}
     </div>
   )
