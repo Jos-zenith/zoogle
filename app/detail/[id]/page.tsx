@@ -289,7 +289,7 @@ function buildSections(item: (typeof portfolioData)[0]): SectionSpec[] {
           <ul className="list-disc ml-6 text-[14px] text-[#3c4043] space-y-1">
             <li>500+ problems solved on Skillrack</li>
             <li>60+ problems solved on LeetCode</li>
-            <li>500+ day Duolingo streak</li>
+            <li>600+ day Duolingo streak</li>
             <li>25+ competitions on Unstop</li>
             <li>6 awards won</li>
             <li>22 team members led</li>
@@ -342,6 +342,8 @@ export default async function DetailPage({ params }: DetailPageProps) {
     timeZone: "UTC",
   })
 
+  const displayUrl = item.category === "projects" ? `zenithjoshua.dev/projects/${slugify(item.title)}` : item.url
+
   const shouldShowBadge = item.category === "achievements" || /(award|winner|won|place|recent|new)/i.test(`${item.title} ${item.description}`)
   const sections = buildSections(item)
 
@@ -359,7 +361,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
       </header>
 
       <main className="mx-auto max-w-[800px] px-4 py-8">
-        <div className="mb-2 text-[13px] text-[#006621]">{item.url}</div>
+        <div className="mb-2 text-[13px] text-[#006621]">{displayUrl}</div>
 
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <h1 className="text-[28px] text-[#1a0dab]">{item.title}</h1>
@@ -403,7 +405,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
       </main>
 
       <footer className="mt-8 border-t border-[#e4e4e4] bg-[#f2f2f2] px-4 py-4">
-        <div className="text-center text-[13px] text-[#70757a]">Portfolio of Zenith Joshua · Built with care</div>
+        <div className="text-center text-[13px] text-[#70757a]">Best viewed in 800x600</div>
       </footer>
     </div>
   )

@@ -7,16 +7,32 @@ import { searchSuggestions } from "@/lib/portfolio-data"
 
 interface SearchBarProps {
   initialQuery?: string
+  value?: string
   autoFocus?: boolean
   compact?: boolean
+  onQueryChange?: (query: string) => void
+  onSubmitQuery?: (query: string) => void
 }
 
-export function SearchBar({ initialQuery = "", autoFocus = false, compact = false }: SearchBarProps) {
-  const [query, setQuery] = useState(initialQuery)
+export function SearchBar({
+  initialQuery = "",
+  value,
+  autoFocus = false,
+  compact = false,
+  onQueryChange,
+  onSubmitQuery,
+}: SearchBarProps) {
+  const [query, setQuery] = useState(value ?? initialQuery)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setQuery(value)
+    }
+  }, [value])
 
   const filteredSuggestions = searchSuggestions
     .filter((suggestion) => suggestion.toLowerCase().includes(query.toLowerCase()) && query.length > 0)
@@ -32,7 +48,11 @@ export function SearchBar({ initialQuery = "", autoFocus = false, compact = fals
     const trimmed = searchQuery.trim()
     if (trimmed) {
       setShowSuggestions(false)
-      router.push(`/search?q=${encodeURIComponent(trimmed)}`)
+      if (onSubmitQuery) {
+        onSubmitQuery(trimmed)
+      } else {
+        router.push(`/search?q=${encodeURIComponent(trimmed)}`)
+      }
     }
   }
 
@@ -68,7 +88,9 @@ export function SearchBar({ initialQuery = "", autoFocus = false, compact = fals
           type="text"
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value)
+            const nextQuery = e.target.value
+            setQuery(nextQuery)
+            onQueryChange?.(nextQuery)
             setSelectedIndex(-1)
             setShowSuggestions(true)
           }}

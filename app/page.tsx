@@ -72,7 +72,7 @@ export default function HomePage() {
             <Link href="/search?q=resume">Resume</Link>
           </div>
           <div className="mt-2 text-center text-[10px] text-[#8a8a8a]">
-            All rights reserved
+            Best viewed in 800x600
           </div>
         </div>
       </footer>

@@ -6,9 +6,20 @@ import { SearchBar } from "./search-bar"
 
 interface SearchHeaderProps {
   query: string
+  onQueryChange?: (query: string) => void
+  onSubmitQuery?: (query: string) => void
 }
 
-export function SearchHeader({ query }: SearchHeaderProps) {
+export function SearchHeader({ query, onQueryChange, onSubmitQuery }: SearchHeaderProps) {
+  const tabs = [
+    { label: "All", q: "" },
+    { label: "About", q: "about" },
+    { label: "Experience", q: "experience" },
+    { label: "Projects", q: "projects" },
+    { label: "Skills", q: "skills" },
+    { label: "Contact", q: "contact" },
+  ]
+
   return (
     <header className="bg-[#f5f5f5] border-b border-[#cccccc]" style={{ fontFamily: "Arial, Helvetica, sans-serif" }}>
       <div className="flex items-center gap-4 px-4 py-2">
@@ -16,30 +27,24 @@ export function SearchHeader({ query }: SearchHeaderProps) {
           <GoogleLogo size="small" />
         </Link>
         <div className="flex-1 max-w-[400px]">
-          <SearchBar initialQuery={query} compact />
+          <SearchBar initialQuery={query} value={query} compact onQueryChange={onQueryChange} onSubmitQuery={onSubmitQuery} />
         </div>
       </div>
 
-      {/* Navigation Tabs - 1997 style */}
+      {/* Navigation Tabs - clickable like Google */}
       <nav className="flex gap-0 pl-[140px] border-t border-[#cccccc] bg-white">
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] border-b-2 border-[#0000cc] bg-white cursor-pointer">
-          All
-        </span>
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] hover:underline cursor-pointer">
-          About
-        </span>
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] hover:underline cursor-pointer">
-          Experience
-        </span>
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] hover:underline cursor-pointer">
-          Projects
-        </span>
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] hover:underline cursor-pointer">
-          Skills
-        </span>
-        <span className="px-3 py-1 text-[11px] text-[#0000cc] hover:underline cursor-pointer">
-          Contact
-        </span>
+        {tabs.map((tab) => {
+          const isActive = (tab.q === "" && !query) || query === tab.q
+          return (
+            <Link
+              key={tab.label}
+              href={`/search${tab.q ? `?q=${encodeURIComponent(tab.q)}` : ""}`}
+              className={`px-3 py-1 text-[11px] ${isActive ? "text-[#0000cc] border-b-2 border-[#0000cc] bg-white" : "text-[#0000cc] hover:underline"}`}
+            >
+              {tab.label}
+            </Link>
+          )
+        })}
       </nav>
     </header>
   )

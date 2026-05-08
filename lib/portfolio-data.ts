@@ -69,14 +69,6 @@ export const portfolioData: SearchResult[] = [
   // Projects
   {
     id: "proj-1",
-    title: "Electric 4-Wheeler Design Challenge - SAEISS",
-    url: "drive.google.com/drive/folders/1SVLk6qsWlZ-nsQEsMhuZbYVaBtXikEPL",
-    description:
-      "Designed and developed an electric 4-wheeler prototype with a 22-member team; placed 3rd at EFWDC'25.",
-    category: "projects",
-  },
-  {
-    id: "proj-2",
     title: "EngineerFit - Vernacular Psychometric Job Matching Engine",
     url: "ebv-engineerfit.vercel.app",
     description:
@@ -84,7 +76,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-3",
+    id: "proj-2",
     title: "Storm-Resilient Mars Rover",
     url: "github.com/Jos-zenith/sand-strom-resistant-rover",
     description:
@@ -92,7 +84,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-4",
+    id: "proj-3",
     title: "Karuvelam - Seemai Karuvelam Bio-Refinery Platform",
     url: "karuvelam.vercel.app",
     description:
@@ -100,7 +92,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-5",
+    id: "proj-4",
     title: "ParkinToday",
     url: "drive.google.com/drive/folders/1VZtImJUuUCpftdFahDbpq6ZtNqSo3CA7",
     description:
@@ -108,7 +100,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-6",
+    id: "proj-5",
     title: "Jalodhyam - Smart Water Circular Economy System",
     url: "e-jalodayam.vercel.app",
     description:
@@ -116,14 +108,14 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-7",
+    id: "proj-6",
     title: "E-Mart Inventory Management System",
     url: "github.com/Jos-zenith/E-Mart",
     description: "A sleek full-stack shopping and inventory experience built as a mini-project.",
     category: "projects",
   },
   {
-    id: "proj-8",
+    id: "proj-7",
     title: "IoT Gesture Wheelchair",
     url: "canva.com/design/DAGP55P-uCM",
     description:
@@ -131,7 +123,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-9",
+    id: "proj-8",
     title: "Smart Navigation Device for Ride-Hailing Drivers",
     url: "zenithjoshua.dev/projects/ride-hailing-device",
     description:
@@ -139,7 +131,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-10",
+    id: "proj-9",
     title: "Portable Non-Contact Glaucoma IOP Monitor",
     url: "zenithjoshua.dev/projects/glaucoma-pressure-monitor",
     description:
@@ -147,7 +139,7 @@ export const portfolioData: SearchResult[] = [
     category: "projects",
   },
   {
-    id: "proj-11",
+    id: "proj-10",
     title: "VICT - Emotional Fingerprinting Cipher",
     url: "vict-emotion-cipher.vercel.app",
     description:
